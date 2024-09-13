@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <div class="card-box table table-bordered">
+                <div class="card-header  bg-info text-light ">Vendor Information for Switches</div>
+                    <div class="card-body text-dark">
+
+                    <tbody>
+                        <tr>
+                            <td>{{ context }}</td>
+                        </tr>
+                    </tbody>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="row g-1">
+                                <div class="col-3">
+                                  <input type="text" class="form-control" placeholder="Vendor Name for Switch" name="vendor">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" placeholder="Device Name  for Switch" name="device_name">
+                                  </div>
+                              </div>            
+                            <button type="submit" class="btn btn-primary text-center">Add</button>
+                                <br>
+                                <br>
+                        </form>
+                    </div>
+            </div>
+        </div>
+
+      
+
+    </div>
+    <div class = "row">
+        <div class="col-12">
+            <div class="card-box table table-bordered col-12">
+                <div class="card-header  bg-dark text-white">Insert Information About Vendor Configuration for Switches</div>
+                    <div class="card-body text-dark">
+
+                        <table class="col-12">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Vendor</th>
+                                    <th scope="col">Device Name</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if stu %}
+                                    {% for x in stu %}
+                                        <tr>
+                                            <td>{{ x.vendor }}</td>
+                                            <td>{{x.device_name}}</td>
+                                            <td>
+                                                <input type="button" class="btn btn-update bg-success"  value="Update">
+                                                <form action="{% url 'delete_switch_vendor_data' x.id %}" method="POST" class=" d-inline">
+                                                    {% csrf_token %}
+                                                    <input type="submit" class="btn btn-update bg-danger"  value="Delete">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                        <h4 class="text-center alert alert-danger">Data not found<h4>
+                                {% endif %}
+                            </tbody>
+                                
+                                    
+                        </table>
+                               
+
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

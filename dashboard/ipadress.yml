@@ -1,0 +1,22 @@
+- connection: local
+  gather_facts: false
+  hosts: router_singapore
+  tasks:
+  - include_vars: secrets.yml
+    name: OBTAIN LOGIN INFORMATION
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: '{{ ansible_host }}'
+        password: '{{ creds[''password''] }}'
+        username: '{{ creds[''username''] }}'
+  - iosxr_config:
+      lines:
+      - description abcd
+      - ipv4 address abcd /128
+      - no shutdown
+      parents: interface abcd
+      provider: '{{ provider }}'
+    name: CONFIGURE INTERFACE SETTINGS
+  vars:
+    ansible_python_interpreter: /usr/bin/python3

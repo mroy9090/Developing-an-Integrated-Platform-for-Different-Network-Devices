@@ -1,0 +1,70 @@
+{% load static  %}
+
+
+  <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/dashboard/" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Router</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/dashboard/vendor" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Vendor </span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Cisco </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item"><a href="/dashboard/ip" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt" aria-expanded="false"></i><span class="hide-menu"> IP Address </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> B.G.P. </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> ISIS </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> OSPF </span></a></li>
+                                    </ul>
+                                </li>
+                                {% comment %} <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Juniper </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item"><a href="/dashboard/juniper_ipconfiguration" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt" aria-expanded="false"></i><span class="hide-menu"> IP Address </span></a></li>
+                                        <li class="sidebar-item"><a href="" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> B.G.P. </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> ISIS </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> OSPF </span></a></li>
+                                    </ul>
+                                </li> {% endcomment %}                                                                                 
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Juniper </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item"><a href="/dashboard/juniper_ipconfiguration" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt" aria-expanded="false"></i><span class="hide-menu"> IP Address </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/juniper/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> B.G.P. </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> ISIS </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> OSPF </span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Mikrotik </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item"><a href="/dashboard/mikrotik_ipconfiguration" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt" aria-expanded="false"></i><span class="hide-menu"> IP Address </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> B.G.P. </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> ISIS </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/bgp_configuration" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> OSPF </span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Switch</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/dashboard/switch/vendor" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Vendor </span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Cisco</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item"><a href="/dashboard/switch/vlan" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt" aria-expanded="false"></i><span class="hide-menu"> Create VLAN </span></a></li>
+                                        <li class="sidebar-item"><a href="/dashboard/switch/interface_configuration" class="sidebar-link waves-effect waves-dark"><i class="mdi mdi-receipt" aria-expanded="false"></i><span class="hide-menu"> Interface Configuration </span></a></li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/dashboard/executealldevices" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Execution For All Devices</span></a></li> 
+                    
+                       
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>

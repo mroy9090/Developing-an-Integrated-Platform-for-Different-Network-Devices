@@ -1,0 +1,33 @@
+vars:
+  ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+   - name: OBTAIN LOGIN INFORMATION
+     include_vars: secrets.yml
+
+   - name: DEFINE PROVIDER
+     set_fact:
+       provider:
+         host: "{{ ansible_host }}"
+         username: "{{ creds['username'] }}"
+         password: "{{ creds['password'] }}"
+
+   - name: CONFIGURE INTERFACE SETTINGS
+     iosxr_config:
+       provider: "{{ provider }}"
+       parents: interface Loopback101
+       lines:
+         - description test-ansible interface
+         - ipv4 address 172.31.1.1 255.255.255.0
+         - no shutdown
+
+   - name: SHOW RUN
+     iosxr_config:
+       provider: "{{ provider }}"
+       commands:
+         - sh run
+       register: config
+
+   - name: CONFIGURATION
+     iosxr_config:
+      src: config.cfg

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook Simulation</title>
+</head>
+<body>
+
+<div id="playbook-output"></div>
+
+<script>
+    function simulatePlaybook(playbook_lines, index) {
+        if (index < playbook_lines.length) {
+            // Append the current line to the playbook-output div
+            document.getElementById('playbook-output').innerHTML += playbook_lines[index] + '<br/>';
+
+            // Move to the next line after a delay (1 second in this example)
+            setTimeout(function() {
+                simulatePlaybook(playbook_lines, index + 1);
+            }, 100);
+        }
+    }
+
+    // Simulate playbook execution with a delay
+    var playbookOutput = `
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+        configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+
+        PLAYBOOK: ipadd.yml ************************************************************************************************************
+        1 plays in ipadd.yml
+
+        PLAY [cisco_singapore] ********************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/ipadd.yml:7
+        ok: [cisco_singapore] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/ipadd.yml:10
+        ok: [cisco_singapore] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/ipadd.yml:17
+        <14.1.101.248> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.248> ESTABLISH LOCAL CONNECTION FOR USER: root
+        <14.1.101.248> EXEC /bin/sh -c 'echo ~root && sleep 0'
+        redirecting (type: modules) 
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [cisco_singapore] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test-",
+                        "ipv4 address 50.50.50.1 255.255.255.0",
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface Loopback101"
+                    ],
+                    "provider": {
+                        "host": "14.1.101.248",
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+
+        ============================================
+
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+        configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+
+        PLAYBOOK: jun-ipadd.yml ***************************************************************************************************************
+        1 plays in jun-ipadd.yml
+
+        PLAY [juniper_agg] ***********************************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/jun-ipadd.yml:7
+        ok: [juniper_agg] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/jun-ipadd.yml:10
+        ok: [juniper_agg] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/jun-ipadd.yml:17
+
+        <14.1.101.210> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.210> ESTABLISH LOCAL CONNECTION FOR USER: root
+        <14.1.101.210> EXEC /bin/sh -c 'echo ~root && sleep 0'
+        redirecting (type: modules) 
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [juniper_agg] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test",
+                        "ipv4 address 60.60.60.1 255.255.255.0",
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface Loopback102”
+                    ],
+                    "provider": {
+                        "host": "14.1.101.210”,
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+        ==================================
+
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+        configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+
+        PLAYBOOK: jun-ipadd.yml ***************************************************************************************************************
+        1 plays in jun-ipadd.yml
+
+        PLAY [juniper_sng] ***********************************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/jun-ipadd.yml:8
+        ok: [juniper_agg] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/jun-ipadd.yml:11
+        ok: [juniper_agg] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/jun-ipadd.yml:17
+
+        <14.1.101.250> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.250> ESTABLISH LOCAL CONNECTION FOR USER: root
+        <14.1.101.250> EXEC /bin/sh -c 'echo ~root && sleep 0'
+        redirecting (type: modules) 
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [juniper_sng] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test",
+                        "ipv4 address 70.70.60.1 255.255.255.0",
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface Loopback103”
+                    ],
+                    "provider": {
+                        "host": "14.1.101.250”,
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+        ===================================
+
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+        configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+
+        PLAYBOOK: ipadd.yml ************************************************************************************************************
+        1 plays in ipadd.yml
+
+        PLAY [cisco_ccu] ********************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/ipadd.yml:7
+        ok: [cisco_ccu] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/ipadd.yml:10
+        ok: [cisco_ccu] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/ipadd.yml:17
+        <14.1.101.212> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.212> ESTABLISH LOCAL CONNECTION FOR USER: root
+        <14.1.101.212> EXEC /bin/sh -c 'echo ~root && sleep 0'
+        redirecting (type: modules) 
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [cisco_singapore] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test-",
+                        "ipv4 address 90.90.90.1 255.255.255.0",
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface Loopback105”
+                    ],
+                    "provider": {
+                        "host": "14.1.101.212”,
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+        ==============================================
+
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+
+        PLAYBOOK: mipadd.yml ************************************************************************************************************
+        1 plays in mipadd.yml
+
+        PLAY [office_mikrotik] ********************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/mipadd.yml:7
+        ok: [office_mikrotik] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/mipadd.yml:10
+        ok: [office_mikrotik] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/mipadd.yml:17
+        <14.1.101.213> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.213> ESTABLISH LOCAL CONNECTION FOR USER: root
+        <14.1.101.213> EXEC /bin/sh -c 'echo ~root && sleep 0'
+        redirecting (type: modules) 
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [office_mikrotik] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test-",
+                        "ipv4 address 95.95.95.1 255.255.255.0",
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface Loopback106”
+                    ],
+                    "provider": {
+                        "host": "14.1.101.213”,
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+        ==============================================
+
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+        configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+
+        PLAYBOOK: mipadd.yml ************************************************************************************************************
+        1 plays in mipadd.yml
+
+        PLAY [mikrotik_colo] ********************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/mipadd.yml:7
+        ok: [mikrotik_colo] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/mipadd.yml:10
+        ok: [mikrotik_colo] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/mipadd.yml:17
+        <14.1.101.211> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.211> ESTABLISH LOCAL CONNECTION FOR USER: root
+        <14.1.101.211> EXEC /bin/sh -c 'echo ~root && sleep 0'
+        redirecting (type: modules) 
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [office_mikrotik] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test-",
+                        "ipv4 address 85.85.85.1 255.255.255.0”,
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface ether7”
+                    ],
+                    "provider": {
+                        "host": "14.1.101.211”,
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+        ===========================================================
+        changed: [juniper_agg]
+        
+        PLAY RECAP ************************************************
+
+        juniper_agg                : ok=3  changed=1  unreachable=0
+
+        changed: [juniper_sng]
+
+        PLAY RECAP ************************************************
+
+        juniper_sng                : ok=3  changed=1  unreachable=0
+
+        changed: [cisco_singapore]
+        
+        PLAY RECAP ************************************************
+
+        cisco_singapore            : ok=3  changed=1  unreachable=0
+
+        changed: [cisco_ccu]
+        
+        PLAY RECAP ************************************************
+
+        cisco_ccu                  : ok=3  changed=1  unreachable=0
+
+        changed: [office_mikrotik]
+        
+        PLAY RECAP ************************************************
+
+        office_mikrotik            : ok=3  changed=1  unreachable=0
+
+        changed: [mikrotik_colo]
+
+        PLAY RECAP ************************************************
+
+        mikrotik_colo              : ok=3  changed=1  unreachable=0
+
+        Playbook execution time: 0 minutes and 7 seconds
+    `;
+    
+    // Split the playbook output into lines
+    var playbook_lines = playbookOutput.split('\n');
+
+    // Start the simulation when the page loads
+    window.onload = function() {
+        simulatePlaybook(playbook_lines, 0);
+    };
+</script>
+
+</body>
+</html>

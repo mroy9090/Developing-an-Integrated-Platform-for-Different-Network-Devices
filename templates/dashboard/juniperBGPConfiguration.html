@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+        <div class="">
+            <div class="card-box table table-bordered">
+                <div class="card-header  bg-info text-light ">Juniper BGP Configuration Information</div>
+                    <div class="card-body text-dark">
+                        <table >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">IP Address</th>
+                                        <th scope="col">Remote IP Address</th>
+                                        <th scope="col">IP ADDRESS</th>
+                                        <th scope="col">AS Number</th>
+                                        <th scope="col">Remote AS Number</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <form action="" method="POST">
+                                    
+                                    <tbody>
+                                        {% if stu %}
+                                            {% for x in stu %}
+                                                <tr>
+                                                    <td>{{ x.ip_address }}</td>
+                                                    <td>{{x.remote_ip_address}}</td>
+                                                    <td>{{x.as_number}}</td>
+                                                    <td>{{x.remote_as_number}}</td>
+                                                    <td>
+                                                        <input type="button" class="btn btn-update bg-success"  value="Update">
+                                                        <form action="" method="POST" class=" d-inline">
+                                                            {% csrf_token %}
+                                                            <input type="submit" class="btn btn-update bg-danger"  value="Delete">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                                <h4 class="text-center alert alert-danger">Data not found<h4>
+                                        {% endif %}
+                                    </tbody>
+                                        <tr>
+                                            <td colspan="50" class="text-center text-danger">No Data To Show</td>
+                                        </tr>
+                                    </table>
+                                    <div class="btn btn-group">
+                                        <button type="button" class="btn btn-warning" id="button_checked">All Checked</button>
+                                        <button type="button" class="btn btn-success" id="unchecked">Unchecked</button>
+                                        <button type="submit" class="btn btn-danger">Checked Delete</button>
+                                    </div>
+                                </form>
+                                <br>
+                                <br>
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card-box table table-bordered">
+                <div class="card-header  bg-dark text-white">Insert Information About B.G.P. Configuration</div>
+                    <div class="card-body text-dark">
+                       <form action="" method="POST">
+                        {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label">IP Address</label>
+                                <input type="text" class="form-control" name="ip_address">
+                            </div>
+                                <span class="text-danger">Danger</span>
+                                <br>
+                                <br>
+                                <div class="mb-3">
+                                    <label class="form-label">Remote IP Address</label>
+                                    <input type="text" class="form-control" name="remote_ip_address">
+                                </div>
+                                    <span class="text-danger">Danger</span>
+                                    <br>
+                                    <br>
+                            <div class="mb-3">
+                                <label class="form-label">AS</label>
+                                <input type="text" class="form-control" name="as_number">
+                            </div>
+                            <span class="text-danger">Danger</span>
+                            <br>
+                            <br>
+
+                            <div class="mb-3">
+                                <label class="form-label">Remote AS</label>
+                                <input type="text" class="form-control" name="remote_as_number">
+                            </div>
+                            <span class="text-danger">Danger</span>
+                            <br>
+                            <br>
+                            
+                            <button type="submit" class="btn btn-primary">Add</button>
+                                <br>
+                                <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+            <div class="card-box table table-bordered">
+                <div class="card-header  bg-info text-light ">Insert Information for VLAN Configuration</div>
+                    <div class="card-body text-dark">
+
+                    <tbody>
+                        <tr>
+                            <td>{{ context }}</td>
+                        </tr>
+                    </tbody>
+                        <form action="" method="POST">
+                            {{vendor_data}}
+                            <div class="row g-1">
+                                <div class="col-3">
+                                    <select class="form-control"  name="vendor_name">
+                                        <option>Vendor Name</option>
+                                        {% for x in object2_data %}
+                                            {% if x.vendor == 'cisco' %}
+                                                <option value="{{ x.vendor }}">{{ x.vendor }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select class="form-control"  name="device_name">
+                                        <option>Device Name</option>
+                                        {% for x in object2_data %}
+                                            <option value="{{ x.device_name }}">{{ x.device_name }}</option>
+
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <div class="col-2">
+                                <input type="text" class="form-control" placeholder="Vlan Id" name="vlan_id">
+                                </div>
+                                <div class="col-2">
+                                <input type="text" class="form-control" placeholder="Description" name="description">
+                                </div>
+                              </div>
+
+                                {% csrf_token %}
+     
+                                                
+                                <button type="submit" class="btn btn-primary text-center">Add</button>
+                                <br>
+                                <br>
+                                    
+                            </form>
+                                <br>
+                                <br>
+                    </div>
+            </div>
+        </div>
+
+      
+
+    </div>
+    <div class = "row">
+        <div class="col-12">
+            <div class="card-box table table-bordered col-12">
+                <div class="card-header  bg-dark text-white">Insert Information About VLAN Configuration</div>
+                    <div class="card-body text-dark">
+
+                        <table class="col-12">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Vendor Name</th>
+                                    <th scope="col">Device Name</th>
+                                    <th scope="col">VLAN ID</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <form action="" method="POST">
+                                
+                                    <tbody>
+                                        {% if object1_data %}
+                                            {% for x in object1_data %}
+                                                <tr>
+                                                    <td>{{ x.vendor_name }}</td>
+                                                    <td>{{ x.device_name }}</td>
+                                                    {% if x.vlan_id %}
+                                                        <td>{{ x.vlan_id }}</td>
+                                                    {% else %}
+                                                        <td>not found</td>
+                                                    {% endif %}
+                                                    {% if x.description %}
+                                                        <td>{{ x.description }}</td>
+                                                    {% else %}
+                                                        <td>not found</td>
+                                                    {% endif %}
+                                                    <td>
+                                                        <form action="{% url 'executionData' x.id %}" method="POST" class=" d-inline">
+                                                            {% csrf_token %}
+                                                            <h1>{{ pi }}</h1>
+                                                            {% comment %} <input type="hidden" id="yourHiddenInputId" value="{{ x.vd }}"> {% endcomment %}
+                                                            <input type="submit" class="btn btn-update bg-success" value="Execute" id="yourHiddenInputId" onclick="
+                                                                let timerInterval;
+                                                                Swal.fire({
+                                                                    title: 'Auto close alert!',
+                                                                    html: 'I will close in <b></b> milliseconds.',
+                                                                    timer: 7000,
+                                                                    timerProgressBar: true,
+                                                                    didOpen: () => {
+                                                                        Swal.showLoading();
+                                                                        const timer = Swal.getPopup().querySelector('b');
+                                                                        timerInterval = setInterval(() => {
+                                                                            timer.textContent = `${Swal.getTimerLeft()}`;
+                                                                        }, 1);
+                                                                    }
+                                                                }).then((result) => {
+                                                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                                                        clearInterval(timerInterval);
+                                                                        console.log('I was closed by the timer');
+                                                                    }
+                                                                });
+                                                            ">
+
+                                                        </form>
+                                                        
+                                                        <form action="{% url 'delete_switch_vlan_data' x.id %}" method="POST" class=" d-inline">
+                                                            {% csrf_token %}
+                                                            <input type="submit" class="btn btn-update bg-warning"  value="Delete">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                                <h4 class="text-center alert alert-info">not found<h4>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                                <div class="btn btn-group">
+                                    <form action="{% url 'executionAllForCisco' %}" method="POST" class=" d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-warning text-center">Execution For All</button>
+                                    </form>
+                                </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+

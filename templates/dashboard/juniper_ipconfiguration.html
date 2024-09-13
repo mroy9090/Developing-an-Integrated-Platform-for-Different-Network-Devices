@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <div class="card-box table table-bordered">
+                <div class="card-header  bg-info text-light ">IP Address Information</div>
+                    <div class="card-body text-dark">
+
+                    <tbody>
+                        <tr>
+                            <td>{{ context }}</td>
+                        </tr>
+                    </tbody>
+                        <form action="" method="POST">
+                        {{vendor_data}}
+                            <div class="row g-1">
+                                <div class="col-2">
+                                  <select class="form-control"  name="vd">
+                                    <option>Select Device Name</option>
+                                    {% for x in object2_data %}
+                                        <option value="{{ x.device_name }}">{{ x.device_name }}</option>
+
+                                    {% endfor %}
+                                  </select>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" placeholder="Verson" name="version">
+                                  </div>
+                                  <div class="col-2">
+                                    <input type="text" class="form-control" placeholder="Interface Name" name="interface_name">
+                                  </div>
+                                  <div class="col-2">
+                                    <input type="text" class="form-control" placeholder="Description" name="description">
+                                  </div>
+                                  <div class="col-2">
+                                    <input type="text" class="form-control" placeholder="IP Address" name="ip_address">
+                                  </div>
+                                  <div class="col-2">
+                                    <input type="text" class="form-control" placeholder="Subnet Mask" name="net_mask">
+                                  </div>
+                              </div>
+
+                            {% csrf_token %}
+                                 {% comment %} <label class="form-label">IP Adress version</label>
+                                 <select class="form-control" aria-label="Default select example">
+                                     <option selected name="version">Open this select menu</option>
+                                     <option value="1">ipv4</option>
+                                     <option value="2">ipv6</option>
+                                 </select> {% endcomment %}
+     
+                                                
+                                 <button type="submit" class="btn btn-primary text-center">Add</button>
+                                     <br>
+                                     <br>
+                             </form>
+                                </form>
+                                <br>
+                                <br>
+                    </div>
+            </div>
+        </div>
+
+      
+
+    </div>
+    <div class = "row">
+        <div class="col-12">
+            <div class="card-box table table-bordered col-12">
+                <div class="card-header  bg-dark text-white">Insert Information About IP Address Configuration</div>
+                    <div class="card-body text-dark">
+
+                        <table class="col-12">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Select Items</th>
+                                    <th scope="col">Device Name</th>
+                                    <th scope="col">Verson</th>
+                                    <th scope="col">Interface Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">IP ADDRESS</th>
+                                    <th scope="col">Net Mask</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <form action="" method="POST">
+                                
+                                    <tbody>
+                                        {% if object1_data %}
+                                            {% for x in object1_data %}
+                                                <tr>
+                                                    <td><input type="checkbox"></td>
+                                                    <td>{{ x.vd }}</td>
+                                                    <td>{{ x.version }}</td>
+                                                    <td>{{x.interface_name}}</td>
+                                                    <td>{{x.description}}</td>
+                                                    <td>{{x.ip_address}}</td>
+                                                    <td>{{x.net_mask}}</td>
+                                                    <td>
+                                                        <form action="" method="POST" class=" d-inline">
+                                                            {% csrf_token %}
+                                                            <input type="submit" class="btn btn-update bg-success" value="Execute" id="yourHiddenInputId" onclick="
+                                                                let timerInterval;
+                                                                Swal.fire({
+                                                                    title: 'Auto close alert!',
+                                                                    html: 'I will close in <b></b> milliseconds.',
+                                                                    timer: 7000,
+                                                                    timerProgressBar: true,
+                                                                    didOpen: () => {
+                                                                        Swal.showLoading();
+                                                                        const timer = Swal.getPopup().querySelector('b');
+                                                                        timerInterval = setInterval(() => {
+                                                                            timer.textContent = `${Swal.getTimerLeft()}`;
+                                                                        }, 1);
+                                                                    }
+                                                                }).then((result) => {
+                                                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                                                        clearInterval(timerInterval);
+                                                                        console.log('I was closed by the timer');
+                                                                    }
+                                                                });
+                                                            ">
+                                                        </form>
+                                                        
+                                                        <form action="{% url 'juniper_ip_data_delete' x.id %}" method="POST" class=" d-inline">
+                                                            {% csrf_token %}
+                                                            <input type="submit" class="btn btn-update bg-warning"  value="Delete">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                                <h4 class="text-center alert alert-info">not found<h4>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+
+                                <div class="btn btn-group">
+                                    <button type="button" class="btn btn-warning" id="button_checked">Execute</button>
+                                </div>
+
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

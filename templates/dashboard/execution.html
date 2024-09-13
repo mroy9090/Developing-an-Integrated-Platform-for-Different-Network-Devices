@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook Simulation</title>
+</head>
+<body>
+
+<div id="playbook-output"></div>
+
+<script>
+    function simulatePlaybook(playbook_lines, index) {
+        if (index < playbook_lines.length) {
+            // Append the current line to the playbook-output div
+            document.getElementById('playbook-output').innerHTML += playbook_lines[index] + '<br/>';
+
+            // Move to the next line after a delay (1 second in this example)
+            setTimeout(function() {
+                simulatePlaybook(playbook_lines, index + 1);
+            }, 100);
+        }
+    }
+
+    // Simulate playbook execution with a delay
+    var playbookOutput = `
+        ansible-playbook [core 2.12.10]
+        config file = /etc/ansible/ansible.cfg
+        configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+        ansible python module location = /usr/lib/python3/dist-packages/ansible
+        ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+        executable location = /usr/bin/ansible-playbook
+        jinja version = 2.10.1
+        libyaml = True
+        Using /etc/ansible/ansible.cfg as config file
+        host_list declined parsing /etc/ansible/hosts as it did not pass its verify_file() method
+        script declined parsing /etc/ansible/hosts as it did not pass its verify_file() method
+        auto declined parsing /etc/ansible/hosts as it did not pass its verify_file() method
+        Parsed /etc/ansible/hosts inventory source with ini plugin
+        redirecting (type: modules) ansible.builtin.iosxr_config to cisco.iosxr.iosxr_config
+        Skipping callback 'default', as we already have a stdout callback.
+        Skipping callback 'minimal', as we already have a stdout callback.
+        Skipping callback 'oneline', as we already have a stdout callback.
+        PLAYBOOK: ipadd.yml ************************************************************************************************************
+        1 plays in ipadd.yml
+
+        PLAY [router_singapore] ********************************************************************************************************
+        META: ran handlers
+
+        TASK [OBTAIN LOGIN INFORMATION] ************************************************************************************************
+        task path: /opt/ipadd.yml:7
+        ok: [router_singapore] => {
+            "ansible_facts": {
+                "creds": {
+                    "password": "*****",
+                    "username": "*****"
+                }
+            },
+            "ansible_included_var_files": [
+                "/opt/secrets.yml"
+            ],
+            "changed": false
+        }
+
+        TASK [DEFINE PROVIDER] *********************************************************************************************************
+        task path: /opt/ipadd.yml:10
+        ok: [router_singapore] => {
+            "changed": false
+        }
+
+        TASK [CONFIGURE INTERFACE SETTINGS] ********************************************************************************************
+        task path: /opt/ipadd.yml:17
+        redirecting (type: modules) ansible.builtin.iosxr_config to cisco.iosxr.iosxr_config
+        redirecting (type: action) ansible.builtin.iosxr to cisco.iosxr.iosxr
+        redirecting (type: action) ansible.builtin.iosxr to cisco.iosxr.iosxr
+        <14.1.101.248> using connection plugin ansible.netcommon.network_cli (was local)
+        <14.1.101.248> ESTABLISH LOCAL CONNECTION FOR USER: root
+        redirecting (type: modules) ansible.builtin.iosxr_config to cisco.iosxr.iosxr_config
+        Using module file /usr/lib/python3/dist-packages/ansible_collections/cisco/iosxr/plugins/modules/iosxr_config.py
+        <14.1.101.248> PUT /root/.ansible/tmp/ansible-local-108963jwyyr5y/tmpx5c588xr TO /root/.ansible/tmp/ansible-tmp-1708279601.3553147-10905-137664250313213/AnsiballZ_iosxr_config.py
+        <14.1.101.248> EXEC /bin/sh -c 'chmod u+x /root/.ansible/tmp/ansible-tmp-1708279601.3553147-10905-137664250313213/ /root/.ansible/tmp/ansible-tmp-1708279601.3553147-10905-137664250313213/AnsiballZ_iosxr_config.py && sleep 0'
+        <14.1.101.248> EXEC /bin/sh -c '/usr/bin/python3 /root/.ansible/tmp/ansible-tmp-1708279601.3553147-10905-137664250313213/AnsiballZ_iosxr_config.py && sleep 0'
+        <14.1.101.248> EXEC /bin/sh -c 'rm -f -r /root/.ansible/tmp/ansible-tmp-1708279601.3553147-10905-137664250313213/ > /dev/null 2>&1 && sleep 0'
+        [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present
+        in the running configuration on device
+        [WARNING]: ['connection local support for this module is deprecated and will be removed in version 2.14, use connection
+        ansible.netcommon.network_cli']
+        changed: [router_singapore] => {
+            "changed": true,
+            "invocation": {
+                "module_args": {
+                    "lines": [
+                        "description test-",
+                        "ipv4 address 50.50.50.1 255.255.255.0",
+                        "no shutdown"
+                    ],
+                    "match": "line",
+                    "parents": [
+                        "interface Loopback101"
+                    ],
+                    "provider": {
+                        "host": "14.1.101.248",
+                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+                        "port": null,
+                        "ssh_keyfile": null,
+                        "timeout": null,
+                        "transport": "cli",
+                        "username": "iot"
+                    },
+                    "replace": "line",
+                    "src": null
+                }
+            }
+        }
+        META: ran handlers
+        META: ran handlers
+
+        PLAY RECAP *********************************************************************************************************************
+        router_singapore           : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+    `;
+    
+    // Split the playbook output into lines
+    var playbook_lines = playbookOutput.split('\n');
+
+    // Start the simulation when the page loads
+    window.onload = function() {
+        simulatePlaybook(playbook_lines, 0);
+    };
+</script>
+
+</body>
+</html>
