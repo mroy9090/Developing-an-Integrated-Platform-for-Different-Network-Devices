@@ -7,7 +7,7 @@ This project is a Django-based web application designed to provide a centralized
 ✅ Analyze network data
 ✅ Interact with devices seamlessly through an intuitive dashboard.
 
-🌟 Features
+## Features
 
 🔍 Real-time Device Monitoring: Track the status and performance of connected devices.
 
@@ -21,7 +21,7 @@ This project is a Django-based web application designed to provide a centralized
 
 🌍 Multi-Vendor Device Support: Uses Ansible to interact with devices from different network vendors.
 
-🛠️ Installation
+## Installation
 
 ✅ Prerequisites
 
@@ -75,7 +75,7 @@ Developing-an-Integrated-Platform/
 │-- manage.py              # Django management script
 │-- __pycache__/           # Compiled Python files
 
-⚙️ Configuration Management
+## Configuration Management
 
 📜 ipaddress.yml: Stores network device configurations and credentials.
 
@@ -85,7 +85,7 @@ Developing-an-Integrated-Platform/
 
 🤖 Ansible Integration for Multi-Vendor Network Devices
 
-This project leverages Ansible to automate network device configurations across different vendors. The automation process includes:
+## This project leverages Ansible to automate network device configurations across different vendors. The automation process includes:
 
 🌍 Device Connectivity: Uses Ansible modules to establish SSH connections to routers, switches, and firewalls.
 
@@ -93,11 +93,9 @@ This project leverages Ansible to automate network device configurations across 
 
 🏢 Vendor-Agnostic Approach: Works with Cisco, Juniper, Arista, and other network devices.
 
-🚀 Playbook Execution: Run Ansible playbooks to configure multiple devices simultaneously:
+🚀 Playbook Execution: Run Ansible playbooks to configure multiple devices simultaneously.
 
-ansible-playbook playbook.yml
-
-📌 Usage
+## Usage
 
 🔑 Login as Admin: Access the admin panel at /admin to manage users and settings.
 
@@ -109,16 +107,7 @@ python yml.py
 
 🚀 Execute Ansible Playbooks: Use Ansible to push configurations to multiple devices.
 
-🤝 Contribution
-
-Contributions are welcome! Follow these steps:
-1️⃣ Fork the repository.
-2️⃣ Create a new branch (feature-branch-name).
-3️⃣ Make your changes and commit (git commit -m 'Description of changes').
-4️⃣ Push to the branch (git push origin feature-branch-name).
-5️⃣ Submit a pull request.
-
-📜 License
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
