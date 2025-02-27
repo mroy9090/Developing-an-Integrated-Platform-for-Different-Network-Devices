@@ -1,4 +1,4 @@
-#🚀 Developing an Integrated Platform for Different Network Devices
+# Developing an Integrated Platform for Different Network Devices
 
 📌 Overview
 
