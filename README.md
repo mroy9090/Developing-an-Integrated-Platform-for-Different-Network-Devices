@@ -1,6 +1,6 @@
 # Developing an Integrated Platform for Different Network Devices
 
-📌 ## Overview
+## Overview
 
 This project is a Django-based web application designed to provide a centralized platform for managing and monitoring various network devices. It allows users to:
 ✅ Configure settings
