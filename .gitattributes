@@ -3,3 +3,5 @@
 */models.py linguist-language=Python
 */views.py linguist-language=Python
 *.js linguist-vendored
+*.html linguist-vendored
+*.css linguist-vendored
