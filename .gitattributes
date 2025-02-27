@@ -2,3 +2,4 @@
 */settings.py linguist-language=Python
 */models.py linguist-language=Python
 */views.py linguist-language=Python
+*.js linguist-vendored
