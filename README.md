@@ -107,12 +107,4 @@ python yml.py
 
 🚀 Execute Ansible Playbooks: Use Ansible to push configurations to multiple devices.
 
-## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-📞 Contact
-
-For any issues or contributions, feel free to reach out via GitHub Issues.
-
-🚀 Happy Coding! 🎉
